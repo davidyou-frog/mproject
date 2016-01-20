@@ -1,0 +1,27 @@
+FROM strongloop/node
+
+MAINTAINER David You <bmfrog2@gmail.com>
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN sudo apt-get update
+
+# set locale ko_KR
+
+RUN sudo apt-get install -y locales
+RUN sudo dpkg-reconfigure locales 
+RUN sudo locale-gen C.UTF-8 
+RUN sudo /usr/sbin/update-locale LANG=C.UTF-8
+	
+# Install needed default locale for Makefly
+RUN echo 'ko_KR.UTF-8 UTF-8' | sudo tee --append /etc/locale.gen
+RUN sudo locale-gen
+
+# Set default locale for the environment
+ENV LC_ALL C.UTF-8
+ENV LANG ko_KR.UTF-8
+ENV LANGUAGE ko_KR.UTF-8
+
+RUN sudo apt-get update
+
+WORKDIR /work/
