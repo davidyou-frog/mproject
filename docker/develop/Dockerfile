@@ -24,4 +24,11 @@ ENV LANGUAGE ko_KR.UTF-8
 
 RUN sudo apt-get update
 
+# Install 
+RUN sudo npm install -g gulp 
+RUN sudo npm install -g bower
+RUN sudo npm install -g grunt-cli
+
 WORKDIR /work/
+
+EXPOSE 3000 35729

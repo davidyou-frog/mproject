@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run --name mproject_dev --rm -it --privileged  -p 3000:3000 -p 35729:35729 -v $(pwd):/work mproject_dev:latest
