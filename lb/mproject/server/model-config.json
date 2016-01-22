@@ -35,5 +35,13 @@
   "GeneralUser": {
     "dataSource": "db",
     "public": true
+  },
+  "Project": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Test": {
+    "dataSource": null,
+    "public": true
   }
 }
