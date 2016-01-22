@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run --rm -it --privileged -v $(pwd):/work mproject_dev:latest
