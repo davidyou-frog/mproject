@@ -1,0 +1,32 @@
+<div id="newbox" style="margin-top:0px;" class="">
+    <div class="">
+	   <h1>New Project<h1>
+       <button type="submit" class="btn btn-success" ng-click="create(project)">Create</button> 
+	   <button type="button" class="btn btn-default submit-button" ng-click="reset()">Reset</button>
+	</div>    
+    <uib-tabset class="panel">
+      <uib-tab heading="Base" >       
+        <div class="panel-body">
+           <formly-form model="project" fields="baseFields">
+           </formly-form>
+		 </div>   
+      </uib-tab>
+      <uib-tab heading="Subversion"> 
+	    <div class="panel-body">
+           <formly-form model="project" fields="svnFields">
+           </formly-form>
+		 </div>   
+      </uib-tab>
+      <uib-tab heading="Git">
+	    <div class="panel-body">
+      	 <p> not ready <p> 
+		 </div>   
+      </uib-tab>
+      <uib-tab heading="Wiki">
+	    <div class="panel-body">
+      	 <p> not ready <p> 
+		 </div>   
+      </uib-tab>
+    </uib-tabset>
+</div>
+
