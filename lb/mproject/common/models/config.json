@@ -1,0 +1,30 @@
+{
+  "name": "Config",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "base_path": {
+      "type": "string",
+      "required": true
+    },
+    "svn_url": {
+      "type": "string",
+      "required": true
+    },
+    "svn_user": {
+      "type": "string",
+      "required": true
+    },
+    "svn_pass": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

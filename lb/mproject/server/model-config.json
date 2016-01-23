@@ -43,5 +43,9 @@
   "Test": {
     "dataSource": null,
     "public": true
+  },
+  "Config": {
+    "dataSource": "db",
+    "public": true
   }
 }

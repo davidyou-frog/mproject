@@ -22,7 +22,8 @@
       <a class="navbar-brand" href="/#/main"><span class="glyphicon glyphicon-th-large" aria-hidden="true">MP</span></a>
     </div>
     <div class="" id="bs-example-navbar-collapse-1">
-        <button type="button" class="btn btn-default navbar-btn" ng-click="Test()">Test</button>
+        <button type="button" class="btn btn-warning navbar-btn" ng-click="Test()">Test</button>
+		 <a ng-href="#setup" class="btn btn-info" role="button">Setup</a>
         <ul class="nav navbar-nav navbar-right">
           <li ng-if="!currentUser"><a ng-href="#/login">Login</a></li>
           <li ng-if="!currentUser"><a ng-href="#/signup">Signup</a></li>
@@ -59,6 +60,7 @@
 <script src="/js/controller/main.js"></script>
 <script src="/js/controller/signup.js"></script>
 <script src="/js/controller/login.js"></script>
+<script src="/js/controller/setup.js"></script>
 	
 </body>
 </html>

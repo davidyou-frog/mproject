@@ -24,6 +24,12 @@ function($stateProvider,$urlRouterProvider,$httpProvider) {
 		controller : 'loginCtrl',
 		skipLogin : true
     })
+    .state('setup', {
+		url: '/setup',
+		templateUrl: 'view/setup.html',
+		controller : 'setupCtrl',
+		skipLogin : false
+    })
     .state('main', {
 		url: '/main',  
 	    views:{

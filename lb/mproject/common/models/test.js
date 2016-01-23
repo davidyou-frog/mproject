@@ -1,10 +1,18 @@
-module.exports = function(Test) {
+var lib_path = process.cwd() + '/server/lib/';
+
+var svn = require( lib_path + 'svn.js');
+
+module.exports = function(Test,Config) {
 
     Test.test = function( data, cb) {
     	console.log( 'Call Test.test remote method - data = ', data );
-    	response = { ack : 'ok' };
-    	cb(null, response);
-    }
+
+		svn.isBeen( function( err, been ){
+    	    response = { ack : 'ok' };
+    	    cb(null, response);
+		});
+		
+    };
     
     Test.remoteMethod(
         'test',
