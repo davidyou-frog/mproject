@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run --rm -it --privileged -v $(pwd):/work mproject_dev:latest
+docker run --rm -it --privileged -v $(pwd):/work  -v $(pwd)/folder_template:/template -v $(pwd)/projects:/projects mproject_dev:latest

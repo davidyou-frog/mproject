@@ -84,5 +84,38 @@ function ($scope,Config, Project,$state, $stateParams) {
 		 $state.go( 'main' );
   	 };
 	 
+  	$scope.CheckExsistSvn = function(project){
+		
+        console.log( 'CALL CheckExsistSvn' );
+		console.log( 'project.code = ' , project.code );
+		Project.exsistSvn( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
+			console.log( value );
+			var data = value.data;
+			
+            if (typeof data== 'object') {
+				  data = JSON.stringify(data, undefined, 2);
+				  console.log( data );
+            }
+
+		});		
+	};
+	
+//  	$scope.NewSvn = function(project){
+//		
+//        console.log( 'CALL NewSvn' );
+//		console.log( 'project.code = ' , project.code );
+//		Project.newSvn( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
+//			console.log( value );
+//			var data = value.data;
+//			
+//            if (typeof data== 'object') {
+//				  data = JSON.stringify(data, undefined, 2);
+//				  console.log( data );
+//            }
+//
+//		});		
+//	};
+	
+	 
 }]);  
  

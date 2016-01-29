@@ -7,10 +7,10 @@ module.exports = function(Test,Config) {
     Test.test = function( data, cb) {
     	console.log( 'Call Test.test remote method - data = ', data );
 
-		svn.isBeen( function( err, been ){
+//		svn.isBeen( function( err, been ){
     	    response = { ack : 'ok' };
     	    cb(null, response);
-		});
+//		});
 		
     };
     
