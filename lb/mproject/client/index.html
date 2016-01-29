@@ -3,9 +3,12 @@
 <head>
     <meta charset="utf-8"> 
 	<title> Project Manager</title>
-	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/jstree/dist/themes/default/style.min.css">
-
+	<link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/lib/jstree/dist/themes/default/style.min.css">
+	<link rel="stylesheet" type="text/css" href="/lib/angular-ui-grid/ui-grid.min.css">
+	<link rel="stylesheet" type="text/css" href="/lib/components-font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	
 </head>
 
 <body>
@@ -22,6 +25,7 @@
       <a class="navbar-brand" href="/#/main"><span class="glyphicon glyphicon-th-large" aria-hidden="true">MP</span></a>
     </div>
     <div class="" id="bs-example-navbar-collapse-1">
+        <a ng-href="#main" class="btn btn-primary" role="button">List</a>
         <a ng-href="#new" class="btn btn-primary" role="button">New</a>
         <button type="button" class="btn btn-warning navbar-btn" ng-click="Test()">Test</button>
 		 <a ng-href="#setup" class="btn btn-info" role="button">Setup</a>
@@ -44,7 +48,10 @@
 <script src="/lib/jquery/dist/jquery.min.js"></script>
 <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
  
-<script src="/lib/angular/angular.min.js"></script>
+<!--script src="/lib/angular/angular.min.js"></script-->
+<script src="/lib/angular/angular.js"></script>
+
+
 <script src="/lib/angular-resource/angular-resource.min.js"></script>
 <script src="/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -52,6 +59,7 @@
 <script src="/lib/api-check/dist/api-check.min.js"></script>
 <script src="/lib/angular-formly/dist/formly.min.js"></script>
 <script src="/lib/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.min.js"></script>
+<script src="/lib/angular-ui-grid/ui-grid.min.js"></script>
 
 <script src="/js/service/lb-services.js"></script>
 
@@ -63,6 +71,7 @@
 <script src="/js/controller/login.js"></script>
 <script src="/js/controller/setup.js"></script>
 <script src="/js/controller/new.js"></script>
+<script src="/js/controller/edit.js"></script>
 	
 </body>
 </html>

@@ -1,8 +1,8 @@
 (function(){
 'use strict';
 var mainApp = angular.module('mainApp',
-    ['ui.router','lbServices','formly', 'formlyBootstrap','ui.bootstrap' ]);
-
+    ['ui.router','lbServices','formly', 'formlyBootstrap','ui.bootstrap','ui.grid','ui.grid.pagination','ui.grid.selection', 'ui.grid.saveState']);
+	
 mainApp.config([ '$stateProvider','$urlRouterProvider', '$httpProvider',
 function($stateProvider,$urlRouterProvider,$httpProvider) {
 
@@ -28,6 +28,12 @@ function($stateProvider,$urlRouterProvider,$httpProvider) {
 		url: '/new',
 		templateUrl: 'view/new.html',
 		controller : 'newCtrl',
+		skipLogin : false
+    })
+    .state('edit', {
+		url: '/edit:code',
+		templateUrl: 'view/edit.html',
+		controller : 'editCtrl',
 		skipLogin : false
     })
     .state('setup', {

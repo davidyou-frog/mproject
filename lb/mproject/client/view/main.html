@@ -1,7 +1,36 @@
 <section>
-<div class="container">
 
-<h1> Main </h1>
-<p> Welcome to main </p> 
-</div>
+  <h1> Project List </h1>
+  <div> 
+    <button type="button" class="btn btn-success" ng-click="edit()"><i class="fa fa-pencil-square-o fa-lg"></i> Edit</button> 
+    <button type="button" class="btn btn-danger " ng-click="remove()"><i class="fa fa-trash-o fa-lg"></i> Remove</button>
+  </div>
+  <br>
+  <div ui-grid="gridOptions" class="projectsGrid"
+       ui-grid-selection 
+	   ui-grid-resize-columns 
+	   ui-grid-move-columns 
+	   ui-grid-save-state>
+  </div>
+
+  <script type="text/ng-template" id="removeModalContent.html">
+      <div class="modal-header">
+          <h3 class="modal-title">Remove Project ?</h3>
+      </div>
+      <div class="modal-body">
+	      <div class="form-group">
+              <label for="code">Code</label>
+              <input type="text" class="form-control" id="code" disabled value="{{item.code}}">
+         </div>
+	      <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" disabled value="{{item.name}}">
+         </div>
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+          <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+      </div>
+  </script>  
+	
 </section>
