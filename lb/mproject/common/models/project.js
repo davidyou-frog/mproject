@@ -43,10 +43,11 @@ module.exports = function(Project) {
 			var svn_folder   = project.svn_url + '/' + svn_folder_name;
 			
 			var svn_config = {
-               base_path : local_folder,
+               base_path : project.base_path,
                svn_user  : project.svn_user, 
                svn_pass  : project.svn_pass, 
                svn_url   : svn_folder, 
+			   svn_local : local_folder,
             };
 			
 			svn.importFolder( svn_config,function( err, success ) {
@@ -94,6 +95,40 @@ module.exports = function(Project) {
         'removeSvn',
         {
           http: {path: '/removeSvn', verb: 'post'},
+          accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+          returns: {arg: 'data', type: 'object' }
+        }
+    );
+
+    Project.checkoutSvn = function( data, cb) {
+    	
+		Project.findOne({where: {code: data.code}}, function(err, project) { 
+
+			var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
+			var local_folder = project.base_path + '/' + svn_folder_name;
+			var svn_folder   = project.svn_url + '/' + svn_folder_name;
+			
+			var svn_config = {
+               base_path : project.base_path,
+               svn_user  : project.svn_user, 
+               svn_pass  : project.svn_pass, 
+               svn_url   : svn_folder, 
+			   svn_local : local_folder,
+            };
+		
+			svn.checkoutFolder( svn_config,function( err, success ) {
+		        var response = { success : success };
+		        cb(null, response);
+			});
+
+		});
+
+    }
+    
+    Project.remoteMethod(
+        'checkoutSvn',
+        {
+          http: {path: '/checkoutSvn', verb: 'post'},
           accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
           returns: {arg: 'data', type: 'object' }
         }

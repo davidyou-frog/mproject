@@ -40,13 +40,12 @@ exports.importFolder = function( config, cb) {
 	
 	var client = getClient( config );
 	
-    client.cmd(['import', config.base_path, config.svn_url, '-m first', '-q' ], function( err ) {
+    client.cmd(['import', config.svn_local, config.svn_url, '-m first', '-q' ], function( err ) {
 		if( err ) { cb( err, false ); return; }
         cb( null, true  );
 	});
 	
 };
-
 
 exports.removeFolder = function( config, cb) {
 	
@@ -59,3 +58,15 @@ exports.removeFolder = function( config, cb) {
 	
 };
 
+exports.checkoutFolder = function( config, cb) {
+	
+	var client = getClient( config );
+	
+    client.cmd(['checkout', config.svn_url, config.svn_local, '-q' ], function( err ) {
+		console.log( 'CB exports.checkoutFolder()' );
+		if( err ) console.log( err );
+		if( err ) { cb( err, false ); return; }
+        cb( null, true  );
+	});
+	
+};
