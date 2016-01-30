@@ -48,6 +48,14 @@ exports.importFolder = function( config, cb) {
 };
 
 
-
-
+exports.removeFolder = function( config, cb) {
+	
+	var client = getClient( config );
+	
+    client.cmd(['remove', config.svn_url, '-m remove project', '-q' ], function( err ) {
+		if( err ) { cb( err, false ); return; }
+        cb( null, true  );
+	});
+	
+};
 

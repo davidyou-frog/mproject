@@ -38,9 +38,6 @@ module.exports = function(Project) {
     	
 		Project.findOne({where: {code: data.code}}, function(err, project) { 
 		
-		    console.log( err );
-			console.log( project );
-			
 			var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
 			var local_folder = '/template/' + project.template;
 			var svn_folder   = project.svn_url + '/' + svn_folder_name;
@@ -65,6 +62,38 @@ module.exports = function(Project) {
         'newSvn',
         {
           http: {path: '/newSvn', verb: 'post'},
+          accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+          returns: {arg: 'data', type: 'object' }
+        }
+    );
+	
+    Project.removeSvn = function( data, cb) {
+    	
+		Project.findOne({where: {code: data.code}}, function(err, project) { 
+		
+			var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
+			var svn_folder   = project.svn_url + '/' + svn_folder_name;
+
+			var svn_config = {
+               base_path : project.base_path,
+               svn_user  : project.svn_user, 
+               svn_pass  : project.svn_pass, 
+               svn_url   : svn_folder, 
+            };
+			
+			svn.removeFolder( svn_config,function( err, success ) {
+		        var response = { success : success };
+		        cb(null, response);
+			});
+
+		});
+
+    }
+    
+    Project.remoteMethod(
+        'removeSvn',
+        {
+          http: {path: '/removeSvn', verb: 'post'},
           accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
           returns: {arg: 'data', type: 'object' }
         }

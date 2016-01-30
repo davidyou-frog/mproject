@@ -114,6 +114,16 @@ function ($scope,Config, Project,$state, $stateParams) {
 		});		
 	};
 	
+  	$scope.RemoveSvn = function(project){
+		Project.removeSvn( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
+			var data = value.data;
+			
+            if (typeof data== 'object') {
+				  data = JSON.stringify(data, undefined, 2);
+            }
+
+		});		
+	};
 	 
 }]);  
  
