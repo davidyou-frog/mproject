@@ -18,6 +18,13 @@ mainApp.controller('setupCtrl', [ '$scope','Config', function ($scope,Config) {
             label: 'Base root path',
         }
     },{
+        key: 'template',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'Template path',
+        }
+    },{
         key: 'svn_url',
         type: 'input',
         templateOptions: {

@@ -44,6 +44,13 @@ function ($scope,Config, Project,$state) {
             label: 'Base root path',
 			disabled : true,
        }
+    },{
+        key: 'template',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'Template path',
+       }
     }];
  
     $scope.svnFields = [{
@@ -77,6 +84,7 @@ function ($scope,Config, Project,$state) {
                 $scope.project.name         = "";
                 $scope.project.folder_name  = "";
                 $scope.project.base_path    = reset_config.base_path   ;
+                $scope.project.template     = reset_config.template    ;
                 $scope.project.svn_url      = reset_config.svn_url     ;
                 $scope.project.svn_user     = reset_config.svn_user    ;
                 $scope.project.svn_pass     = reset_config.svn_pass    ;
