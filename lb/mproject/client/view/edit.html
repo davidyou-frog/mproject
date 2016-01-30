@@ -1,35 +1,50 @@
-<div id="editbox" style="margin-top:0px;" class="">
-    <div class="">
-	   <h1>Edit Project<h1>
-       <button type="submit" class="btn btn-success" ng-click="update(project)">Update</button> 
-	    <button type="button" class="btn btn-default submit-button" ng-click="back()">Back</button>
-		<button type="button" class="btn btn-info" ng-click="CheckExsistSvn(project)">Check exsist svn</button>
-		<button type="button" class="btn btn-info" ng-click="NewSvn(project)">Create svn</button>
-		<button type="button" class="btn btn-info" ng-click="RemoveSvn(project)">Remove svn</button>
-		<button type="button" class="btn btn-info" ng-click="CheckoutSvn(project)">Checkout svn</button>
-	</div>    
-    <uib-tabset class="panel">
-      <uib-tab heading="Base" >       
-        <div class="panel-body">
-           <formly-form model="project" fields="baseFields">
-           </formly-form>
-		 </div>   
-      </uib-tab>
-      <uib-tab heading="Subversion"> 
-	    <div class="panel-body">
-           <formly-form model="project" fields="svnFields">
-           </formly-form>
-		 </div>   
-      </uib-tab>
-      <uib-tab heading="Git">
-	    <div class="panel-body">
-      	 <p> not ready <p> 
-		 </div>   
-      </uib-tab>
-      <uib-tab heading="Wiki">
-	    <div class="panel-body">
-      	 <p> not ready <p> 
-		 </div>   
-      </uib-tab>
-    </uib-tabset>
+<div id="editbox" style="margin-top:0px;" >
+    <div>
+       <h1>Edit Project</h1>
+       <div class="row">
+	       <div class="col-xs-3">
+               <button type="submit" class="btn btn-success" ng-click="update(project)">Update</button> 
+               <button type="button" class="btn btn-default submit-button" ng-click="back()">Back</button>
+	       </div>
+	       <div class="col-xs-8">
+			    <uib-alert style="padding: 5px; margin-bottom : 0px;" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+	       </div>
+	   </div>
+	</div>   
+    <br> 	
+	<div>
+        <uib-tabset class="panel">
+          <uib-tab heading="Base" >       
+            <div class="panel-body">
+               <formly-form model="project" fields="baseFields">
+               </formly-form>
+	   	  </div>   
+          </uib-tab>
+          <uib-tab heading="Subversion"> 
+	        <div class="panel-body">
+	   	     <div > 
+	   	          <button type="button" class="btn btn-info" ng-click="CheckExsistSvn(project)">Check exsist svn</button>
+	   	          <button type="button" class="btn btn-info" ng-click="NewSvn(project)">Create svn</button>
+	   	          <button type="button" class="btn btn-info" ng-click="RemoveSvn(project)">Remove svn</button>
+	   	          <button type="button" class="btn btn-info" ng-click="CheckoutSvn(project)">Checkout svn</button>
+	   	 	</div>   
+	   	 	<br>
+	   	     <div > 
+                 <formly-form model="project" fields="svnFields">
+                 </formly-form>
+	   	 	</div>   
+	   	  </div>   
+          </uib-tab>
+          <uib-tab heading="Git">
+	        <div class="panel-body">
+          	 <p> not ready <p> 
+	   	  </div>   
+          </uib-tab>
+          <uib-tab heading="Wiki">
+	        <div class="panel-body">
+          	 <p> not ready <p> 
+	   	  </div>   
+          </uib-tab>
+        </uib-tabset>
+	</div>    	
 </div>

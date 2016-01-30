@@ -63,7 +63,6 @@ exports.checkoutFolder = function( config, cb) {
 	var client = getClient( config );
 	
     client.cmd(['checkout', config.svn_url, config.svn_local, '-q' ], function( err ) {
-		console.log( 'CB exports.checkoutFolder()' );
 		if( err ) console.log( err );
 		if( err ) { cb( err, false ); return; }
         cb( null, true  );
