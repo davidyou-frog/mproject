@@ -147,10 +147,40 @@ function ($scope,Config, Project,$state, $stateParams) {
             } else {
 				$scope.setAlert( 'fail : check out ' + project.code );
 			}			
-			
-
 		});		
 	};
 	
+  	$scope.IgnoreGitSvn = function(project){
+		Project.ignoreSvn( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
+			var data = value.data;
+            if( data.success == true ) {
+			    $scope.setAlert( project.code + ' is ignored git folder' );
+            } else {
+				$scope.setAlert( 'fail : ignore git ' + project.code );
+			}			
+		});		
+	};
+	
+  	$scope.CommitSvn = function(project){
+		Project.commitSvn( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
+			var data = value.data;
+            if( data.success == true ) {
+			    $scope.setAlert( project.code + ' is commited' );
+            } else {
+				$scope.setAlert( 'fail : commit ' + project.code );
+			}			
+		});		
+	};
+	
+  	$scope.UpdateSvn = function(project){
+		Project.updateSvn( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
+			var data = value.data;
+            if( data.success == true ) {
+			    $scope.setAlert( project.code + ' is updated' );
+            } else {
+				$scope.setAlert( 'fail : update ' + project.code );
+			}			
+		});		
+	};
+
 }]);  
- 

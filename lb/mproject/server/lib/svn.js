@@ -63,9 +63,43 @@ exports.checkoutFolder = function( config, cb) {
 	var client = getClient( config );
 	
     client.cmd(['checkout', config.svn_url, config.svn_local, '-q' ], function( err ) {
+		if( err ) { cb( err, false ); return; }
+        cb( null, true  );
+	});
+	
+};
+
+exports.ignoreFolder = function( config, cb) {
+	
+	var client = getClient( config );
+	
+    client.cmd(['propset', 'svn:ignore', '*', 'git', '-q' ], function( err ) {
+		if( err ) { cb( err, false ); return; }
+        cb( null, true  );
+	});
+	
+};
+
+exports.commitFolder = function( config, cb) {
+	
+	var client = getClient( config );
+	
+    client.cmd(['commit', '-m', '"mproject"', '-q' ], function( err ) {
+		if( err ) { cb( err, false ); return; }
+        cb( null, true  );
+	});
+	
+};
+
+exports.updateFolder = function( config, cb) {
+	
+	var client = getClient( config );
+	
+    client.cmd(['update', '-q' ], function( err ) {
 		if( err ) console.log( err );
 		if( err ) { cb( err, false ); return; }
         cb( null, true  );
 	});
 	
 };
+

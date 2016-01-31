@@ -133,5 +133,104 @@ module.exports = function(Project) {
           returns: {arg: 'data', type: 'object' }
         }
     );
+
+    Project.ignoreSvn = function( data, cb) {
+    	
+		Project.findOne({where: {code: data.code}}, function(err, project) { 
+
+			var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
+			var local_folder = project.base_path + '/' + svn_folder_name;
+			var svn_folder   = project.svn_url + '/' + svn_folder_name;
+			
+			var svn_config = {
+               base_path : local_folder,
+               svn_user  : project.svn_user, 
+               svn_pass  : project.svn_pass, 
+               svn_url   : svn_folder, 
+            };
+		
+			svn.ignoreFolder( svn_config,function( err, success ) {
+		        var response = { success : success };
+		        cb(null, response);
+			});
+
+		});
+
+    }
+    
+    Project.remoteMethod(
+        'ignoreSvn',
+        {
+          http: {path: '/ignoreSvn', verb: 'post'},
+          accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+          returns: {arg: 'data', type: 'object' }
+        }
+    );
+	
+    Project.commitSvn = function( data, cb) {
+    	
+		Project.findOne({where: {code: data.code}}, function(err, project) { 
+
+			var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
+			var local_folder = project.base_path + '/' + svn_folder_name;
+			var svn_folder   = project.svn_url + '/' + svn_folder_name;
+			
+			var svn_config = {
+               base_path : local_folder,
+               svn_user  : project.svn_user, 
+               svn_pass  : project.svn_pass, 
+               svn_url   : svn_folder, 
+            };
+		
+			svn.commitFolder( svn_config,function( err, success ) {
+		        var response = { success : success };
+		        cb(null, response);
+			});
+
+		});
+
+    }
+    
+    Project.remoteMethod(
+        'commitSvn',
+        {
+          http: {path: '/commitSvn', verb: 'post'},
+          accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+          returns: {arg: 'data', type: 'object' }
+        }
+    );
+	
+    Project.updateSvn = function( data, cb) {
+    	
+		Project.findOne({where: {code: data.code}}, function(err, project) { 
+
+			var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
+			var local_folder = project.base_path + '/' + svn_folder_name;
+			var svn_folder   = project.svn_url + '/' + svn_folder_name;
+			
+			var svn_config = {
+               base_path : local_folder,
+               svn_user  : project.svn_user, 
+               svn_pass  : project.svn_pass, 
+               svn_url   : svn_folder, 
+            };
+		
+			svn.updateFolder( svn_config,function( err, success ) {
+		        var response = { success : success };
+		        cb(null, response);
+			});
+
+		});
+
+    }
+    
+    Project.remoteMethod(
+        'updateSvn',
+        {
+          http: {path: '/updateSvn', verb: 'post'},
+          accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+          returns: {arg: 'data', type: 'object' }
+        }
+    );	
 	
 };
