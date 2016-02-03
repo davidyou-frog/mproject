@@ -25,6 +25,22 @@
     "svn_pass": {
       "type": "string",
       "required": true
+    },
+    "gitlab_url": {
+      "type": "string",
+      "required": true
+    },
+    "gitlab_user": {
+      "type": "string",
+      "required": true
+    },
+    "gitlab_pass": {
+      "type": "string",
+      "required": true
+    },
+    "gitlab_token": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],

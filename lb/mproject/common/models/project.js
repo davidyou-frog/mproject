@@ -1,5 +1,6 @@
 var lib_path = process.cwd() + '/server/lib/';
 var svn = require( lib_path + 'svn.js');
+var git = require( lib_path + 'git.js');
 
 module.exports = function(Project) {
 
@@ -228,6 +229,64 @@ module.exports = function(Project) {
         'updateSvn',
         {
           http: {path: '/updateSvn', verb: 'post'},
+          accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+          returns: {arg: 'data', type: 'object' }
+        }
+    );	
+
+    Project.initGit = function( data, cb) {
+    	
+		Project.findOne({where: {code: data.code}}, function(err, project) { 
+
+		var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
+		var local_folder = project.base_path + '/' + svn_folder_name + 'git/';
+		
+		var git_config = {
+              base_path : local_folder,
+           };
+	
+		git.initFolder( git_config,function( err, success ) {
+		        var response = { success : success };
+		        cb(null, response);
+			});
+
+		});
+
+    }
+    
+    Project.remoteMethod(
+        'initGit',
+        {
+          http: {path: '/initGit', verb: 'post'},
+          accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+          returns: {arg: 'data', type: 'object' }
+        }
+    );	
+
+    Project.testGit = function( data, cb) {
+    	
+		Project.findOne({where: {code: data.code}}, function(err, project) { 
+
+		var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
+		var local_folder = project.base_path + '/' + svn_folder_name + 'git/';
+		
+		var git_config = {
+              base_path : local_folder,
+           };
+	
+		git.testFolder( git_config,function( err, success ) {
+		        var response = { success : success };
+		        cb(null, response);
+			});
+
+		});
+
+    }
+    
+    Project.remoteMethod(
+        'testGit',
+        {
+          http: {path: '/testGit', verb: 'post'},
           accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
           returns: {arg: 'data', type: 'object' }
         }

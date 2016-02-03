@@ -45,6 +45,34 @@ mainApp.controller('setupCtrl', [ '$scope','Config', function ($scope,Config) {
             required: true,
             label: 'Subversion Password',
         }
+    },{
+        key: 'gitlab_url',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'GitLab URL',
+        }
+    },{
+        key: 'gitlab_user',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'GitLab Username',
+        }
+    },{
+        key: 'gitlab_pass',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'GitLab Password',
+        }
+    },{
+        key: 'gitlab_token',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'GitLab Token',
+        }
     }];
 	
 	 $scope.config = Config.findById({ id: 1 });

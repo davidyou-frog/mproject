@@ -2,15 +2,16 @@ var lib_path = process.cwd() + '/server/lib/';
 
 var svn = require( lib_path + 'svn.js');
 
-module.exports = function(Test,Config) {
+var loopback = require("loopback");
 
+module.exports = function(Test,Config) {
+	
+	
     Test.test = function( data, cb) {
     	console.log( 'Call Test.test remote method - data = ', data );
 
-//		svn.isBeen( function( err, been ){
-    	    response = { ack : 'ok' };
-    	    cb(null, response);
-//		});
+   	    response = { ack : 'ok' };
+   	    cb(null, response);
 		
     };
     

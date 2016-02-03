@@ -25,6 +25,14 @@ ENV LANGUAGE ko_KR.UTF-8
 RUN sudo apt-get update
 
 # Install 
+RUN sudo apt-get install -y build-essential
+
+# Node update
+RUN sudo npm cache clean -f
+RUN sudo npm install -g n
+RUN sudo n stable
+
+# Install 
 RUN sudo npm install -g gulp 
 RUN sudo npm install -g bower
 RUN sudo npm install -g grunt-cli
