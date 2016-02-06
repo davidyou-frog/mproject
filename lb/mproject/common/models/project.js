@@ -351,5 +351,77 @@ module.exports = function(Project) {
           returns: {arg: 'data', type: 'object' }
         }
     );
+
+    Project.configGit = function( data, cb) {
+    	
+		Project.findOne({where: {code: data.code}}, function(err, project) {
+			
+		    var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
+		    var local_folder    = project.base_path + '/' + svn_folder_name + 'git/';
+			
+			git.configLocal( local_folder, 'user.name', project.gitlab_user,function( err, success ) {
+                 cb(null, { success : success } );				
+			});	
+			
+		});
+
+    }
+    
+    Project.remoteMethod(
+        'configGit',
+        {
+          http: {path: '/configGit', verb: 'post'},
+          accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+          returns: {arg: 'data', type: 'object' }
+        }
+    );
+
+    Project.pullGit = function( data, cb) {
+    	
+		Project.findOne({where: {code: data.code}}, function(err, project) {
+
+		    var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
+		    var local_folder    = project.base_path + '/' + svn_folder_name + 'git/';
+	        var p = url.parse(project.gitlab_url); 
+			// http://username:password@hostname/username/name.git   
+			var gitlab_url  = p. protocol
+			                + '//'
+			                + project.gitlab_user
+							+ ':'
+							+ project.gitlab_pass
+							+ '@'
+							+ p.hostname
+							+ '/'
+							+ project.gitlab_user
+							+ '/'
+							+ svn_folder_name.replace(/\//g,'') 
+							+ '.git'; 
+
+		    var git_config = {
+                  base_path    : local_folder,
+				  gitlab_url   : gitlab_url,
+               };
+		    
+		    git.pullFolder( git_config,function( err, success ) {
+				
+				    if( err ) {
+						console.log( err );
+					} 						
+					cb(null, { success : success } );
+		    	});
+
+		});
+
+    }
+    
+    Project.remoteMethod(
+        'pullGit',
+        {
+          http: {path: '/pullGit', verb: 'post'},
+          accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+          returns: {arg: 'data', type: 'object' }
+        }
+    );
 	
 };
+

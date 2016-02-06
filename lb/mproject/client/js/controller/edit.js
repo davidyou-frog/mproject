@@ -252,4 +252,30 @@ function ($scope,Config, Project,$state, $stateParams) {
 		});		
 	};
 
+  	$scope.ConfigGit = function(project){
+		Project.configGit( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
+			var data = value.data;
+
+            if( data.success == true ) {
+			    $scope.setAlert( project.code + ' is configed' );
+            } else {
+				$scope.setAlert( 'fail : config ' + project.code );
+			}			
+			
+		});		
+	};
+	
+  	$scope.PullGit = function(project){
+		Project.pullGit( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
+			var data = value.data;
+
+            if( data.success == true ) {
+			    $scope.setAlert( project.code + ' is pulled' );
+            } else {
+				$scope.setAlert( 'fail : pull ' + project.code );
+			}			
+			
+		});		
+	};
+	
 }]);  
