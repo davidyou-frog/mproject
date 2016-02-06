@@ -7,13 +7,32 @@ module.exports = function(app) {
         {
             template: {
                 "method": "GET",
-                "url": "http://192.168.10.12/api/v3/projects",
+                "url": "{url}api/v3/projects",
                 "headers": {
-                    "PRIVATE-TOKEN": "MWq_9Vqisj6QJYBJSSy7",
+					"accept": "application/json",
+					"content-type": "application/json",
+                    "PRIVATE-TOKEN": "{token}",
                 },
             },
             functions: {
-               "list": []
+               "list": ["url", "token"]
+            }
+        },
+        {
+            template: {
+                "method": "POST",
+                "url": "{url}api/v3/projects",
+                "headers": {
+					"accept": "application/json",
+					"content-type": "application/json",
+                    "PRIVATE-TOKEN": "{token}",
+                },
+				"form": {
+                    "name" : "{name}"  
+				},
+            },
+            functions: {
+               "create": ["url", "token", "name" ]
             }
         }
     ]});

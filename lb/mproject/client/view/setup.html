@@ -1,7 +1,16 @@
 <div id="setupbox" style="margin-top:0px;" class="">
     <div class="">
-        <div class="">
-            <div class=""><h1>Setup<h1></div>
+        <div class="row" >
+            <div class="col-xs-2">
+			    <h1>Setup<h1>
+			 </div>
+	        <div class="col-xs-8" > 
+			   
+			    <uib-alert style="padding: 5px; margin-bottom : 0px;" 
+				           ng-repeat="alert in alerts" 
+						   type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+				
+	        </div>
         </div>
         <div style="padding-top:10px" class="">
             <div style="display:none" id="setup-alert" class=""></div>

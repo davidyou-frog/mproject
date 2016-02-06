@@ -10,6 +10,16 @@
 var mainApp = angular.module('mainApp'); 
 mainApp.controller('setupCtrl', [ '$scope','Config', function ($scope,Config) {
 
+    $scope.alerts = [];
+	
+    $scope.closeAlert = function(index) {
+		$scope.alerts = [];
+    };  
+	
+    $scope.setAlert = function( msg ) {
+		$scope.alerts = [{ type: 'danger', msg: msg }];
+    };  
+
     $scope.configFields = [{
         key: 'base_path',
         type: 'input',
@@ -79,7 +89,13 @@ mainApp.controller('setupCtrl', [ '$scope','Config', function ($scope,Config) {
 	
   	 $scope.update = function(config){
 		 $scope.config = config;
-		 $scope.config.$save();
+		 $scope.config.$save(function() {
+            // success
+			 $scope.setAlert( "update success" );
+         }, function(res) {
+            // error
+			$scope.setAlert( "update fail" );
+         });
   	 };
 	 
 }]);  

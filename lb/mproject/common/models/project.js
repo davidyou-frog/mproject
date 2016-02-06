@@ -243,15 +243,14 @@ module.exports = function(Project) {
 			var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
 			svn_folder_name = svn_folder_name.replace(/\//g,''); 
 			
-			console.log( svn_folder_name );
-			
-			Gitlab.list(function (err, data) {
+			Gitlab.list(project.gitlab_url,project.gitlab_token, function (err, data) {
 				 
 			    var isFinding = data.some(function (item, index, array) {
            	        return svn_folder_name ===  item.name;
                 });
-				 var response = { exsist : isFinding };
-		         cb(null, response);
+				
+				var response = { exsist : isFinding };
+		        cb(null, response);
 				 
             });
 		    
@@ -268,6 +267,42 @@ module.exports = function(Project) {
         }
     );
 	
+    Project.newGit = function( data, cb) {
+    	
+		Project.findOne({where: {code: data.code}}, function(err, project) {
+
+			var Gitlab = app.models.Gitlab;
+
+			var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
+			svn_folder_name = svn_folder_name.replace(/\//g,''); 
+			
+			Gitlab.create(project.gitlab_url,project.gitlab_token, svn_folder_name, function (err, data) {
+				
+				if( err ){
+					cb(null, { success : false } );
+				} else {
+					
+					if( data.message === '404 Not Found' ){
+						cb(null, { success : false } );
+					} else {
+						cb(null, { success : true } );
+					}
+				}
+				 
+            });
+		
+		});
+
+    }
+    
+    Project.remoteMethod(
+        'newGit',
+        {
+          http: {path: '/newGit', verb: 'post'},
+          accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+          returns: {arg: 'data', type: 'object' }
+        }
+    );
 
     Project.initGit = function( data, cb) {
     	

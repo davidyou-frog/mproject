@@ -225,6 +225,19 @@ function ($scope,Config, Project,$state, $stateParams) {
 
 		});		
 	};
+
+  	$scope.NewGit = function(project){
+		Project.newGit( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
+			var data = value.data;
+
+            if( data.success == true ) {
+			    $scope.setAlert( project.code + ' is created' );
+            } else {
+				$scope.setAlert( 'fail : create ' + project.code );
+			}			
+			
+		});		
+	};
 	
 
   	$scope.InitGit = function(project){
