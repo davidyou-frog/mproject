@@ -239,27 +239,17 @@ function ($scope,Config, Project,$state, $stateParams) {
 		});		
 	};
 	
+  	$scope.CloneGit = function(project){
+		Project.cloneGit( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
+			var data = value.data;
 
-  	$scope.InitGit = function(project){
-		Project.initGit( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
-			var data = value.data;
             if( data.success == true ) {
-			    $scope.setAlert( project.code + ' is inited for git' );
+			    $scope.setAlert( project.code + ' is cloned' );
             } else {
-				$scope.setAlert( 'fail : init for git ' + project.code );
+				$scope.setAlert( 'fail : clone ' + project.code );
 			}			
+			
 		});		
 	};
-	
-  	$scope.TestGit = function(project){
-		Project.testGit( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
-			var data = value.data;
-            if( data.success == true ) {
-			    $scope.setAlert( project.code + ' is tested for git' );
-            } else {
-				$scope.setAlert( 'fail : test for git ' + project.code );
-			}			
-		});		
-	};
-	
+
 }]);  
