@@ -23,7 +23,7 @@
           <uib-tab heading="Subversion"> 
 	        <div class="panel-body">
 	   	     <div > 
-	   	          <button type="button" class="btn btn-info" ng-click="CheckExsistSvn(project)">Check exsist</button>
+	   	          <button type="button" class="btn btn-info" ng-click="CheckExistSvn(project)">Check exist</button>
 	   	          <button type="button" class="btn btn-info" ng-click="NewSvn(project)">Create</button>
 	   	          <button type="button" class="btn btn-info" ng-click="RemoveSvn(project)">Remove</button>
 	   	          <button type="button" class="btn btn-info" ng-click="CheckoutSvn(project)">Checkout</button>
@@ -41,12 +41,14 @@
           <uib-tab heading="Git">
 	        <div class="panel-body">
 	   	     <div > 
+	   	          <button type="button" class="btn btn-info" ng-click="CheckExistGit(project)">Check exist</button>
 	   	          <button type="button" class="btn btn-info" ng-click="InitGit(project)">Init Git</button>
 	   	          <button type="button" class="btn btn-info" ng-click="TestGit(project)">Test Git</button>
 	   	     </div > 
 	   	 	  <br>
 	   	     <div > 
-          	     <p> not ready <p> 
+                 <formly-form model="project" fields="gitFields">
+                 </formly-form>
 	   	 	  </div>   
 			  
 	   	  </div>   

@@ -75,6 +75,36 @@ function ($scope,Config, Project,$state) {
             label: 'Subversion Password',
         }
     }];
+
+    $scope.gitFields = [{
+        key: 'gitlab_url',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'GitLab URL',
+        }
+    },{
+        key: 'gitlab_user',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'GitLab Username',
+        }
+    },{
+        key: 'gitlab_pass',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'GitLab Password',
+        }
+    },{
+        key: 'gitlab_token',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'GitLab Token',
+        }
+    }];
 	
 	$scope.project = {};
 	var reset_config = {};
@@ -88,6 +118,10 @@ function ($scope,Config, Project,$state) {
                 $scope.project.svn_url      = reset_config.svn_url     ;
                 $scope.project.svn_user     = reset_config.svn_user    ;
                 $scope.project.svn_pass     = reset_config.svn_pass    ;
+                $scope.project.gitlab_url   = reset_config.gitlab_url  ;
+                $scope.project.gitlab_user  = reset_config.gitlab_user ;
+                $scope.project.gitlab_pass  = reset_config.gitlab_pass ;
+                $scope.project.gitlab_token = reset_config.gitlab_token;
 		
 	}
 	
@@ -108,11 +142,14 @@ function ($scope,Config, Project,$state) {
 		 console.log( "Call $scope.create()" );
 		 console.log( project );
 		 Project.create( project ,
-		     function(config) { /* success */ 
+		     function(projectResult) { /* success */ 
+			     console.log( "CB Project.create() success"  );
+				 console.log( projectResult );
 		         $state.go( 'main' );     
 	         },
              function(errorResponse) { /* error */ 
-			 
+			     console.log( "CB Project.create() error"  );
+				 console.log( errorResponse );
 		     }
 		);
   	 };

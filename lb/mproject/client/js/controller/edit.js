@@ -87,6 +87,36 @@ function ($scope,Config, Project,$state, $stateParams) {
         }
     }];
 	
+    $scope.gitFields = [{
+        key: 'gitlab_url',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'GitLab URL',
+        }
+    },{
+        key: 'gitlab_user',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'GitLab Username',
+        }
+    },{
+        key: 'gitlab_pass',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'GitLab Password',
+        }
+    },{
+        key: 'gitlab_token',
+        type: 'input',
+        templateOptions: {
+            required: true,
+            label: 'GitLab Token',
+        }
+    }];
+	
 	$scope.project = {};
 	$scope.code    = $stateParams.code;
 	
@@ -101,9 +131,9 @@ function ($scope,Config, Project,$state, $stateParams) {
 		 $state.go( 'main' );
   	 };
 	 
-  	$scope.CheckExsistSvn = function(project){
+  	$scope.CheckExistSvn = function(project){
 		
-		Project.exsistSvn( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
+		Project.existSvn( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
 			var data = value.data;
             if( data.exsist == true ) {
 			    $scope.setAlert( project.code + ' exist' );
@@ -182,6 +212,20 @@ function ($scope,Config, Project,$state, $stateParams) {
 			}			
 		});		
 	};
+	
+  	$scope.CheckExistGit = function(project){
+		
+		Project.existGit( { code : project.code } ).$promise.then(function ( value,responseHeaders) {
+			var data = value.data;
+            if( data.exsist == true ) {
+			    $scope.setAlert( project.code + ' exist' );
+            } else {
+				$scope.setAlert( project.code + ' no exist' );
+			}
+
+		});		
+	};
+	
 
   	$scope.InitGit = function(project){
 		Project.initGit( { code : project.code } ).$promise.then(function ( value,responseHeaders) {

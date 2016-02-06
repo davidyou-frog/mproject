@@ -1,10 +1,11 @@
 var lib_path = process.cwd() + '/server/lib/';
 var svn = require( lib_path + 'svn.js');
 var git = require( lib_path + 'git.js');
+var app = require('../../server/server');
 
 module.exports = function(Project) {
 
-    Project.exsistSvn = function( data, cb) {
+    Project.existSvn = function( data, cb) {
     	
 		Project.findOne({where: {code: data.code} }, function(err, project) { 
 		
@@ -27,9 +28,9 @@ module.exports = function(Project) {
     }
     
     Project.remoteMethod(
-        'exsistSvn',
+        'existSvn',
         {
-          http: {path: '/exsistSvn', verb: 'post'},
+          http: {path: '/existSvn', verb: 'post'},
           accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
           returns: {arg: 'data', type: 'object' }
         }
@@ -233,6 +234,40 @@ module.exports = function(Project) {
           returns: {arg: 'data', type: 'object' }
         }
     );	
+	
+    Project.existGit = function( data, cb) {
+		Project.findOne({where: {code: data.code} }, function(err, project) { 
+		
+			var Gitlab = app.models.Gitlab;
+
+			var svn_folder_name = svn.getSvnPass( project.code, project.folder_name );
+			svn_folder_name = svn_folder_name.replace(/\//g,''); 
+			
+			console.log( svn_folder_name );
+			
+			Gitlab.list(function (err, data) {
+				 
+			    var isFinding = data.some(function (item, index, array) {
+           	        return svn_folder_name ===  item.name;
+                });
+				 var response = { exsist : isFinding };
+		         cb(null, response);
+				 
+            });
+		    
+		});
+    	
+    }
+    
+    Project.remoteMethod(
+        'existGit',
+        {
+          http: {path: '/existGit', verb: 'post'},
+          accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+          returns: {arg: 'data', type: 'object' }
+        }
+    );
+	
 
     Project.initGit = function( data, cb) {
     	
